@@ -31,6 +31,7 @@ const { handleHash } = require("./commands/hash");
 const { handleHashCompare } = require("./commands/hashCompare");
 const { handleEncrypt } = require("./commands/encrypt");
 const { handleDecrypt } = require("./commands/decrypt");
+const { handleLogStats } = require("./commands/logStats");
 
 /**
  * Main REPL loop
@@ -232,6 +233,22 @@ const run = async () => {
         outputArg,
         passwordArg,
       );
+      if (result.ok) {
+        printCurrentDir(currentDir);
+      } else {
+        console.log(OPERATION_FAILED_MESSAGE);
+      }
+      return;
+    }
+
+    if (command === "log-stats") {
+      const rest = line.trim().slice(command.length).trim();
+      const { input: inputArg, output: outputArg } = parseCsvToJsonArgs(rest);
+      if (!inputArg || !outputArg) {
+        console.log(INVALID_INPUT_MESSAGE);
+        return;
+      }
+      const result = await handleLogStats(currentDir, inputArg, outputArg);
       if (result.ok) {
         printCurrentDir(currentDir);
       } else {

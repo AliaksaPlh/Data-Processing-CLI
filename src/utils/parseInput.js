@@ -94,6 +94,22 @@ const parseHashCompareArgs = (rest) => {
   };
 };
 
+/**
+ * parse --input, --output, --password from command args (encrypt)
+ * @param {string} rest - line after command name
+ * @returns {{ input: string | null, output: string | null, password: string | null }}
+ */
+const parseEncryptArgs = (rest) => {
+  const inputMatch = rest.match(/--input\s+(?:"([^"]*)"|(\S+))/);
+  const outputMatch = rest.match(/--output\s+(?:"([^"]*)"|(\S+))/);
+  const passwordMatch = rest.match(/--password\s+(?:"([^"]*)"|(\S+))/);
+  return {
+    input: inputMatch ? (inputMatch[1] ?? inputMatch[2]) : null,
+    output: outputMatch ? (outputMatch[1] ?? outputMatch[2]) : null,
+    password: passwordMatch ? (passwordMatch[1] ?? passwordMatch[2]) : null,
+  };
+};
+
 module.exports = {
   parseInput,
   parseCsvToJsonArgs: parseInputOutputArgs,
@@ -101,4 +117,5 @@ module.exports = {
   parseCountArgs,
   parseHashArgs,
   parseHashCompareArgs,
+  parseEncryptArgs,
 };

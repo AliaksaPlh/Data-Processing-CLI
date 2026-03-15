@@ -16,6 +16,7 @@ const {
   parseCountArgs,
   parseHashArgs,
   parseHashCompareArgs,
+  parseEncryptArgs,
 } = require("./utils/parseInput");
 const {
   printCurrentDir,
@@ -28,6 +29,8 @@ const { handleJsonToCsv } = require("./commands/jsonToCsv");
 const { handleCount } = require("./commands/count");
 const { handleHash } = require("./commands/hash");
 const { handleHashCompare } = require("./commands/hashCompare");
+const { handleEncrypt } = require("./commands/encrypt");
+const { handleDecrypt } = require("./commands/decrypt");
 
 /**
  * Main REPL loop
@@ -189,6 +192,50 @@ const run = async () => {
       } else {
         console.log(result.match ? "OK" : "MISMATCH");
         printCurrentDir(currentDir);
+      }
+      return;
+    }
+
+    if (command === "encrypt") {
+      const rest = line.trim().slice(command.length).trim();
+      const { input: inputArg, output: outputArg, password: passwordArg } =
+        parseEncryptArgs(rest);
+      if (!inputArg || !outputArg || !passwordArg) {
+        console.log(INVALID_INPUT_MESSAGE);
+        return;
+      }
+      const result = await handleEncrypt(
+        currentDir,
+        inputArg,
+        outputArg,
+        passwordArg,
+      );
+      if (result.ok) {
+        printCurrentDir(currentDir);
+      } else {
+        console.log(OPERATION_FAILED_MESSAGE);
+      }
+      return;
+    }
+
+    if (command === "decrypt") {
+      const rest = line.trim().slice(command.length).trim();
+      const { input: inputArg, output: outputArg, password: passwordArg } =
+        parseEncryptArgs(rest);
+      if (!inputArg || !outputArg || !passwordArg) {
+        console.log(INVALID_INPUT_MESSAGE);
+        return;
+      }
+      const result = await handleDecrypt(
+        currentDir,
+        inputArg,
+        outputArg,
+        passwordArg,
+      );
+      if (result.ok) {
+        printCurrentDir(currentDir);
+      } else {
+        console.log(OPERATION_FAILED_MESSAGE);
       }
       return;
     }

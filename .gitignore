@@ -1,0 +1,11 @@
+
+node_modules/
+data.json
+data2.json
+from-json.csv
+data.csv.sha256.bad
+data.csv.sha256
+data.csv
+data.csv.enc
+wIgnore/
+scripts/

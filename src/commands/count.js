@@ -1,6 +1,6 @@
 const fs = require("fs");
 const fsPromises = require("fs").promises;
-const { resolvePath } = require("../utils/pathUtils");
+const { resolvePath } = require("../utils/pathResolver");
 
 /**
  * Count lines, words, and characters in the data stream -the complete file is not in memory

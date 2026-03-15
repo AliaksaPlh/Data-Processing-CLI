@@ -7,5 +7,5 @@ data.csv.sha256.bad
 data.csv.sha256
 data.csv
 data.csv.enc
-wIgnore/
+testIgnore/
 scripts/

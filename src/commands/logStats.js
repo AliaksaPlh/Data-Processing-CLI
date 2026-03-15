@@ -3,7 +3,7 @@ const fsPromises = require("fs").promises;
 const os = require("os");
 const path = require("path");
 const { Worker } = require("worker_threads");
-const { resolvePath } = require("../utils/pathUtils");
+const { resolvePath } = require("../utils/pathResolver");
 
 const TOP_PATHS_LIMIT = 10;
 

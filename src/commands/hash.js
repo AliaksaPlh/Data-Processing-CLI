@@ -2,7 +2,7 @@ const crypto = require("crypto");
 const fs = require("fs");
 const path = require("path");
 const fsPromises = require("fs").promises;
-const { resolvePath } = require("../utils/pathUtils");
+const { resolvePath } = require("../utils/pathResolver");
 
 const HASH_ALGORITHMS = ["sha256", "md5", "sha512"];
 

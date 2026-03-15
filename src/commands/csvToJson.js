@@ -2,7 +2,7 @@ const fs = require("fs");
 const fsPromises = require("fs").promises;
 const { pipeline } = require("stream/promises");
 const { Transform } = require("stream");
-const { resolvePath } = require("../utils/pathUtils");
+const { resolvePath } = require("../utils/pathResolver");
 
 /**
  * pars parseCsvLine into arr fields

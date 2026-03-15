@@ -1,5 +1,5 @@
 /**
- * parse input into command and args
+ * parse command line arguments
  * @param {string} line
  * @returns {{ command: string, args: string[], pathForCd?: string }}
  */
@@ -28,7 +28,7 @@ const parseInput = (line) => {
 };
 
 /**
- * parse --input and --output from command args (csv-to-json, json-to-csv)
+ * parse --input and --output from command args (csv-to-json, json-to-csv, log-stats)
  * @param {string} rest - line after command name
  * @returns {{ input: string | null, output: string | null }}
  */
@@ -55,7 +55,6 @@ const parseCountArgs = (rest) => {
 
 /**
  * parse --input, --algorithm, --save from command args (hash)
- *  default sha256, validation  in handleHash
  * @param {string} rest - line after command name
  * @returns {{ input: string | null, algorithm: string, save: boolean }}
  */
@@ -95,7 +94,7 @@ const parseHashCompareArgs = (rest) => {
 };
 
 /**
- * parse --input, --output, --password from command args (encrypt)
+ *parse --input, --output, --password from command args (encrypt, decrypt)
  * @param {string} rest - line after command name
  * @returns {{ input: string | null, output: string | null, password: string | null }}
  */

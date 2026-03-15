@@ -1,5 +1,5 @@
 const fsPromises = require("fs").promises;
-const { resolvePath } = require("../utils/pathUtils");
+const { resolvePath } = require("../utils/pathResolver");
 const { hashStream, HASH_ALGORITHMS } = require("./hash");
 
 /**

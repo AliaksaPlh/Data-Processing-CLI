@@ -1,6 +1,6 @@
 const fs = require("fs");
 const fsPromises = require("fs").promises;
-const { resolvePath } = require("../utils/pathUtils");
+const { resolvePath } = require("../utils/pathResolver");
 
 /**
  * @param {string} value

@@ -1,7 +1,7 @@
 const path = require("path");
 
 /**
- * specifi a path relative to the current dir, or normalize it if path is absolute
+ * resolve paths relative to current working directory or normalize
  * @param {string} currentDir
  * @param {string} rawPath
  * @returns {string}

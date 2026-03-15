@@ -3,7 +3,7 @@ const fs = require("fs");
 const fsPromises = require("fs").promises;
 const { Transform } = require("stream");
 const { pipeline } = require("stream/promises");
-const { resolvePath } = require("../utils/pathUtils");
+const { resolvePath } = require("../utils/pathResolver");
 
 const SALT_LEN = 16;
 const IV_LEN = 12;

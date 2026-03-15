@@ -1,0 +1,9 @@
+{
+  "name": "data-processing-cli",
+  "version": "1.0.0",
+  "description": "Interactive command-line data processing toolkit",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js"
+  }
+}

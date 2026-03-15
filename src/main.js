@@ -14,6 +14,8 @@ const {
   parseCsvToJsonArgs,
   parseJsonToCsvArgs,
   parseCountArgs,
+  parseHashArgs,
+  parseHashCompareArgs,
 } = require("./utils/parseInput");
 const {
   printCurrentDir,
@@ -24,6 +26,8 @@ const {
 const { handleCsvToJson } = require("./commands/csvToJson");
 const { handleJsonToCsv } = require("./commands/jsonToCsv");
 const { handleCount } = require("./commands/count");
+const { handleHash } = require("./commands/hash");
+const { handleHashCompare } = require("./commands/hashCompare");
 
 /**
  * Main REPL loop
@@ -145,6 +149,46 @@ const run = async () => {
         printCurrentDir(currentDir);
       } else {
         console.log(OPERATION_FAILED_MESSAGE);
+      }
+      return;
+    }
+
+    if (command === "hash") {
+      const rest = line.trim().slice(command.length).trim();
+      const { input: inputArg, algorithm, save } = parseHashArgs(rest);
+      if (!inputArg) {
+        console.log(INVALID_INPUT_MESSAGE);
+        return;
+      }
+      const result = await handleHash(currentDir, inputArg, algorithm, save);
+      if (result.ok) {
+        console.log(`${result.algorithm}: ${result.hash}`);
+        printCurrentDir(currentDir);
+      } else {
+        console.log(OPERATION_FAILED_MESSAGE);
+      }
+      return;
+    }
+
+    if (command === "hash-compare") {
+      const rest = line.trim().slice(command.length).trim();
+      const { input: inputArg, hash: hashArg, algorithm } =
+        parseHashCompareArgs(rest);
+      if (!inputArg || !hashArg) {
+        console.log(INVALID_INPUT_MESSAGE);
+        return;
+      }
+      const result = await handleHashCompare(
+        currentDir,
+        inputArg,
+        hashArg,
+        algorithm,
+      );
+      if (!result.ok) {
+        console.log(OPERATION_FAILED_MESSAGE);
+      } else {
+        console.log(result.match ? "OK" : "MISMATCH");
+        printCurrentDir(currentDir);
       }
       return;
     }

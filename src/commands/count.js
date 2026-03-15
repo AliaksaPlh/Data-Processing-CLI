@@ -48,7 +48,7 @@ const countStream = (filePath) => {
 /**
  * Count lines, words, and characters in a file using streams.
  * @param {string} currentDir
- * @param {string} inputPath - path to input file (relative or absolute)
+ * @param {string} inputPath - path to input file (rel/abs)
  * @returns {Promise<{ ok: boolean, lines?: number, words?: number, characters?: number }>}
  */
 const handleCount = async (currentDir, inputPath) => {

@@ -53,9 +53,52 @@ const parseCountArgs = (rest) => {
   };
 };
 
+/**
+ * parse --input, --algorithm, --save from command args (hash)
+ *  default sha256, validation  in handleHash
+ * @param {string} rest - line after command name
+ * @returns {{ input: string | null, algorithm: string, save: boolean }}
+ */
+const parseHashArgs = (rest) => {
+  const inputMatch = rest.match(/--input\s+(?:"([^"]*)"|(\S+))/);
+  const algorithmMatch = rest.match(/--algorithm\s+(?:"([^"]*)"|(\S+))/);
+  const save = /\b--save\b/.test(rest);
+  const algorithmRaw = algorithmMatch
+    ? (algorithmMatch[1] ?? algorithmMatch[2])
+    : null;
+  const algorithm = algorithmRaw ? algorithmRaw.toLowerCase() : "sha256";
+  return {
+    input: inputMatch ? (inputMatch[1] ?? inputMatch[2]) : null,
+    algorithm,
+    save,
+  };
+};
+
+/**
+ * parse --input, --hash, --algorithm from command args (hash-compare)
+ * @param {string} rest - line after command name
+ * @returns {{ input: string | null, hash: string | null, algorithm: string }}
+ */
+const parseHashCompareArgs = (rest) => {
+  const inputMatch = rest.match(/--input\s+(?:"([^"]*)"|(\S+))/);
+  const hashMatch = rest.match(/--hash\s+(?:"([^"]*)"|(\S+))/);
+  const algorithmMatch = rest.match(/--algorithm\s+(?:"([^"]*)"|(\S+))/);
+  const algorithmRaw = algorithmMatch
+    ? (algorithmMatch[1] ?? algorithmMatch[2])
+    : null;
+  const algorithm = algorithmRaw ? algorithmRaw.toLowerCase() : "sha256";
+  return {
+    input: inputMatch ? (inputMatch[1] ?? inputMatch[2]) : null,
+    hash: hashMatch ? (hashMatch[1] ?? hashMatch[2]) : null,
+    algorithm,
+  };
+};
+
 module.exports = {
   parseInput,
   parseCsvToJsonArgs: parseInputOutputArgs,
   parseJsonToCsvArgs: parseInputOutputArgs,
   parseCountArgs,
+  parseHashArgs,
+  parseHashCompareArgs,
 };
